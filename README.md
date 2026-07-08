@@ -1,5 +1,9 @@
 # OpsBridge BE
 
+![Python](https://img.shields.io/badge/Python-3.12-3776ab?logo=python)
+![Flask](https://img.shields.io/badge/Flask-REST-000000?logo=flask)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-SQLAlchemy_Async-4169e1?logo=postgresql)
+
 운영 변경 요청, 승인, 감사 로그 흐름을 제공하는 Flask REST API입니다.
 
 ## 기능

@@ -1,26 +1,45 @@
 # OpsBridge BE
 
-Flask RESTful backend for operations approval workflow.
+운영 변경 요청, 승인, 감사 로그 흐름을 제공하는 Flask REST API입니다.
 
-## Architecture
-
-- Backend shape: `MVC`
-- Database: `PostgreSQL`
-- ORM: `SQLAlchemy 2.0 Async Mode`
-- Runtime: Python Flask with Gunicorn/Waitress, no Node.js backend
-- API style: REST only. GraphQL was deliberately removed.
-
-## demo-backend conversion
-
-The source idea from `cyjoon68/demo-backend` is converted from NestJS/GraphQL style auth, user, phone verification, and token hardening into Flask REST endpoints:
+## 기능
 
 - `POST /api/auth/login`
 - `POST /api/auth/refresh`
 - `GET /api/dashboard`
 - `PATCH /api/events/{event_id}/status`
+- OpenAPI 명세 제공
+- k6 smoke script 제공
 
-## Resume bullets
+## 아키텍처
 
-- Rebuilt demo-backend authentication semantics as Flask REST with JWT refresh flow.
-- Implemented MVC backend using PostgreSQL and SQLAlchemy 2.0 Async Mode.
-- Added OpenAPI, pytest contract tests, Docker Compose, and k6 p95 smoke threshold.
+- 구조: MVC
+- Framework: Flask
+- ORM: SQLAlchemy 2.0 Async Mode
+- Database: PostgreSQL
+- Runtime: Gunicorn / Waitress
+
+## 실행
+
+```bash
+python3 -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+pytest
+```
+
+## Docker
+
+```bash
+docker compose up --build
+```
+
+## 환경 변수
+
+```bash
+DATABASE_URL=postgres://app:app@localhost:5432/app
+```
+
+## 설계 메모
+
+운영 변경 요청과 감사 로그를 분리해 승인 상태 변경, rollback 판단, 변경 이력 추적을 REST API로 다룰 수 있게 구성했습니다.
